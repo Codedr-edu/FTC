@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+    <style>
+        .dropdown-item :hover{
+            color: orange;
+        }
+    </style>
+</head>
+<body class="bg-dark">
+    <div class="container">
+        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+            <div class="col-md-3 mb-2 mb-md-0">
+              <a href="/" class="d-inline-flex text-decoration-none text-primary navbar-brand" style="font-size: 30px;">
+                F <span style="color:orange;">T</span><span class="text-success">C</span>
+              </a>
+            </div>
+      
+            <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0 link-light">
+              <li><a href="#" class="nav-link px-2 link-secondary">Trang Chủ</a></li>
+              <li><a href="{% url 'blog' %}" class="nav-link px-2 link-light">Blog</a></li>
+              <li class="nav-item dropdown">
+                <a class="nav-link px-2 link-light dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Về FTC
+                </a>
+                <ul class="dropdown-menu" data-bs-theme="dark">
+                  <li><a class="dropdown-item link-light" href="#">Lịch sử</a></li>
+                  <li><a class="dropdown-item link-light" href="#">Roadmap phát triển</a></li>
+                  <li><a class="dropdown-item link-light" href="#">Thành viên</a></li>
+                  <li><a class="dropdown-item link-light" href="#">Album ảnh</a></li>
+                </ul>
+              </li>
+              <li><a href="{% url 'member' %}" class="nav-link px-2 link-light">Thành viên</a></li>
+              <li><a href="{% url 'album' %}" class="nav-link px-2 link-light">Album</a></li>
+              {% if bio %}
+              <li><a href="{% url 'post' %}" class="nav-link px-2 link-light">FTCommunity</a></li>
+              {% endif %}
+            </ul>
+      
+            <div class="col-md-3 text-end">
+              <button type="button" class="btn btn-outline-light me-2" data-bs-toggle="modal" data-bs-target="#modalSignin">Đăng nhập</button>
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#apply">Apply vào FTC</button>
+            </div>
+          </header>
+        <section>
+            <div id="carouselExampleIndicators" class="carousel slide">
+                <div class="carousel-indicators">
+                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner rounded-3">
+                {% if carousels %}
+                    {% for carousel in carousels %}
+                    <div class="carousel-item active">
+                        <img src="{% carousel.image.url %}" class="d-block w-100" alt="...">
+                    </div>
+                    {% endfor %}
+                {% endif %}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+        </div>
+        </section>
+        <section>
+            <div class="container col-xxl-8 px-4 py-5">
+                <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+                  <div class="col-10 col-sm-8 col-lg-6">
+                    <img src="" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+                  </div>
+                  <div class="col-lg-6">
+                    <h1 class="display-5 fw-bold lh-1 mb-3 text-primary">Fschools <span style="color:orange;">Technology</span> <span class="text-success">Club</span></h1>
+                    <p class="lead text-light">Quickly design and customize responsive mobile-first sites with Bootstrap, the world’s most popular front-end open source toolkit, featuring Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful JavaScript plugins.</p>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                      <button type="button" class="btn btn-primary btn-lg px-4 me-md-2">Tìm hiểu thêm</button>
+                      <button type="button" class="btn btn-outline-light btn-lg px-4">Tôi đã là thành viên của câu lạc bộ</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+        </section>
+        <section class="container">
+            <div class="bg-light rounded" style="height: 3px;"></div>
+            <h1 class="text-center text-light" style="margin-top: 30px;margin-bottom: 30px;">Blog của FTC</h1>
+            {% if blogs %}
+                {% for blog in blogs %}
+                <div class="card shadow-lg" style="width: 25rem;" data-bs-theme="dark">
+                    <img src="{{ blog.cover.url }}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">{{blog.title}}</h5>
+                      <p class="card-text">{{blog.description}}</p>
+                      <a href="{% url 'blog_view' id=blog.id %}" class="btn btn-primary">Xem</a>
+                    </div>
+                  </div>
+                {% endfor %}
+            {% endif %}
+        </section>
+        <section class="container">
+            <div class="bg-light rounded" style="height: 3px;"></div>
+            <h1 class="text-center text-light" style="margin-top: 30px;margin-bottom: 30px;">Album của FTC</h1>
+            {% if albums %}
+                {% for album in albums %}
+                    <img src="..."  class="img-fluid rounded" style="width: 500px;height: 200px;"/>
+                {% endfor %}
+            {% endif %}
+        </section>
+        <div class="container">
+            <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top" data-bs-theme="dark">
+              <div class="col-md-4 d-flex align-items-center">
+                <a href="/" class="mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
+                  Fschool Technology Club
+                </a>
+                <span class="mb-3 mb-md-0 text-body-secondary">&copy; 2023 Hoàng Hùng Anh</span>
+              </div>
+          
+              <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+                <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"/></svg></a></li>
+                <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"/></svg></a></li>
+                <li class="ms-3"><a class="text-body-secondary" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
+              </ul>
+            </footer>
+          </div>
+          <div class="modal" tabindex="-1" role="dialog" id="modalSignin" data-bs-theme="dark">
+            <div class="modal-dialog">
+              <div class="modal-content rounded-4 shadow">
+                <div class="modal-header p-5 pb-4 border-bottom-0">
+                  <h1 class="fw-bold mb-0 fs-2 text-light">Đăng nhập</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+          
+                <div class="modal-body p-5 pt-0">
+                  <form class="" method="post" action="/accounts/login/">
+                    {% crsf_token %}
+                    <div class="form-floating mb-3">
+                      <input type="text" class="form-control rounded-3" id="floatingInput" name="username" placeholder="Tên người dùng">
+                      <label for="floatingPassword" class="text-light">Tên người dùng</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                      <input type="password" class="form-control rounded-3" id="floatingPassword" placeholder="Mật khẩu">
+                      <label for="floatingPassword" class="text-light">Mật khẩu</label>
+                    </div>
+                    <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Đăng nhập</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal" tabindex="-1" role="dialog" id="apply" data-bs-theme="dark">
+            <div class="modal-dialog">
+              <div class="modal-content rounded-4 shadow">
+                <div class="modal-header p-5 pb-4 border-bottom-0">
+                  <h1 class="fw-bold mb-0 fs-2 text-light">Apply vào FTC</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+          
+                <div class="modal-body p-5 pt-0">
+                  <form class="" method="post" action="/apply/">
+                    {% crsf_token %}
+                    <div class="form-floating mb-3">
+                      <input type="text" class="form-control rounded-3" id="floatingInput" name="name" placeholder="Họ và tên">
+                      <label for="floatingPassword" class="text-light">Họ và tên</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control rounded-3" id="floatingInput" name="name" placeholder="Lớp">
+                        <label for="floatingPassword" class="text-light">Lớp</label>
+                      </div>
+                    <div class="form-floating mb-3">
+                      <textarea class="form-control rounded-3" placeholder="Thư ngỏ" cols="10" rows="30" style="height: 300px"></textarea>
+                      <label for="floatingPassword" class="text-light">Thư ngỏ</label>
+                    </div>
+                    <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Đăng nhập</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+</body>
+</html>
